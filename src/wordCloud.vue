@@ -40,8 +40,8 @@ class Circle{
     normalizedWord: string;
     fx?: number;
     fy?: number;
-    x?: number;
-    y?: number;
+    x: number;
+    y: number;
 
 
     constructor(maxValue:number, minValue: number, dataItem:any){
@@ -49,30 +49,32 @@ class Circle{
         this.maxR = 100;
         this.minR = 50;
 
+        this.x = 0;
+        this.y = 0;
+
         //recebe o maior valor entre os dados e o menor
         this.maxValue = maxValue;
         this.minValue = minValue;
        
-        if(dataItem){
-            this.total = dataItem.total ? dataItem.total :0;
-            //coloca o total de respostas para esse item na escala entre todas as respostas
-            this.scaleValue = (this.total - this.minValue)/(this.maxValue - this.minValue)
-            //calcula o raio do circulo de acordo com a escala definida
-            this.r = (this.scaleValue*(this.maxR-this.minR)) + this.minR;
-            //calcula a circunferencia de acordo com o raio definido
-            this.circumference = 2* 3.14 * this.r; 
-            this.positivo = dataItem.positivo  ? dataItem.positivo :0;
-            this.neutro = dataItem.neutro  ? dataItem.neutro :0;
-            this.negativo = dataItem.negativo  ? dataItem.negativo :0;
-            this.percentPositivo = dataItem.percentPositivo  ? dataItem.percentPositivo :0;
-            this.percentNeutro = dataItem.percentNeutro  ? dataItem.percentNeutro :0;
-            this.percentNegativo = dataItem.percentNegativo  ? dataItem.percentNegativo :0;
-            this.normalizedWord = dataItem.normalizedWord  ? dataItem.normalizedWord :0;
+        this.total = dataItem.total ? dataItem.total :0;
+        //coloca o total de respostas para esse item na escala entre todas as respostas
+        this.scaleValue = (this.total - this.minValue)/(this.maxValue - this.minValue)
+        //calcula o raio do circulo de acordo com a escala definida
+        this.r = (this.scaleValue*(this.maxR-this.minR)) + this.minR;
+        //calcula a circunferencia de acordo com o raio definido
+        this.circumference = 2* 3.14 * this.r; 
+        this.positivo = dataItem.positivo  ? dataItem.positivo :0;
+        this.neutro = dataItem.neutro  ? dataItem.neutro :0;
+        this.negativo = dataItem.negativo  ? dataItem.negativo :0;
+        this.percentPositivo = dataItem.percentPositivo  ? dataItem.percentPositivo :0;
+        this.percentNeutro = dataItem.percentNeutro  ? dataItem.percentNeutro :0;
+        this.percentNegativo = dataItem.percentNegativo  ? dataItem.percentNegativo :0;
+        this.normalizedWord = dataItem.normalizedWord  ? dataItem.normalizedWord :0;
 
-            //utiliza a escala e o percentual positivo como sementes para gerar posições "aleatórias" de inicio
-            this.x = this.scaleValue * ((0.80*width) - (0.20*width)) + (0.20*width)
-            this.y = this.percentPositivo/100 * ((0.80*height) - (0.20*height)) + (0.20*height)
-        }
+        //utiliza a escala e o percentual positivo como sementes para gerar posições "aleatórias" de inicio
+        this.x = this.scaleValue * ((0.80*width) - (0.20*width)) + (0.20*width)
+        this.y = this.percentPositivo/100 * ((0.80*height) - (0.20*height)) + (0.20*height)
+    
     }
 }
 
@@ -89,7 +91,7 @@ function checkBounds(circle: Circle){
 //
 let c:Circle[] = [];
 let circleArray = ref(c);
-let simulation;
+let simulation: any;
 
 onMounted(() => {
     //cria os circulos e inicializa seus valores
